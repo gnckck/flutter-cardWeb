@@ -61,7 +61,18 @@ class _CardPageState extends State<CardPage> {
               title: Text(
                 numList[index].toString(),
               ),
-
+              //trailing을 사용하지 않고 title을 GestureDetector로 감싸서
+              //Icon을 넣어줘도 됨!
+              trailing: GestureDetector(
+                child: const Icon(
+                  Icons.delete,
+                ),
+                onTap: () {
+                  setState(() {
+                    numList.removeAt(index);
+                  });
+                },
+              ),
               onTap: () {
                setState(() {
                  numList[index]++;
