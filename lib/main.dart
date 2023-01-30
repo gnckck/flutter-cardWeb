@@ -22,23 +22,30 @@ class CardWeb extends StatelessWidget {
 class CardPage extends StatefulWidget {
   const CardPage({super.key});
 
+
   @override
   State<CardPage> createState() => _CardPageState();
 }
 
+
 class _CardPageState extends State<CardPage> {
 
 
+  final numList = [];
+  final cNums = Random();
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+      for (int i = 0; i < 10; i++){
+        numList.add(cNums.nextInt(50));
+     }
+    super.initState();
+   }
+  
 
-    final numList = [];
-    final cNums = Random();
-    for (int i = 0; i < 10; i++){
-      numList.add(cNums.nextInt(50));
-    }
-
-
+  @override
+  Widget build(BuildContext context ) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -50,23 +57,23 @@ class _CardPageState extends State<CardPage> {
         itemCount: numList.length,
         itemBuilder: (context, index){
           return Card(
-            child: Row(
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  child: Text(
-                    numList[index].toString(),
-                  )
-                ),
-              ],
+            child: ListTile(
+              title: Text(
+                numList[index].toString(),
+              ),
+
+              onTap: () {
+               setState(() {
+                 numList[index]++;
+               });
+              }
             ),
           );
         }
         ),
     );
-
   }
 }
+
 
 
